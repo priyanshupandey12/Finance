@@ -1,5 +1,5 @@
 const ApiResponse = require('../../comman/utils/api.response');
-const {register,login,forgotPassword,getMe,refreshToken,resetPassword,verifyEmail,logout}=require('./auth.service')
+const {register,login,forgotPassword,getMe,refreshToken,resetPassword,verifyEmail,logout,deleteUser,updateUserRole}=require('./auth.service')
 
 const Register=async(req,res)=>{
     const user= await register(req.body);
@@ -51,6 +51,16 @@ const GetMe = async (req, res) => {
   ApiResponse.ok(res, "User profile", user);
 };
 
+const DeleteUser = async (req, res) => {
+  await deleteUser(req.params.id);
+  ApiResponse.ok(res, "User deleted successfully");
+};
+
+const UpdateUserRole = async (req, res) => {
+  await updateUserRole(req.params.id, req.body.role);
+  ApiResponse.ok(res, "User role updated successfully");
+};
+
 module.exports = {
   Register,
   Login,
@@ -60,6 +70,8 @@ module.exports = {
   ForgotPassword,
   ResetPassword,
   GetMe,
+  DeleteUser,
+  UpdateUserRole,
 };
 
 

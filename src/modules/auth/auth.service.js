@@ -146,6 +146,21 @@ const getMe = async (userId) => {
   return user;
 };
 
+const deleteUser=async(userId)=>{
+   const user = await Auth.findById(userId);
+    if (!user) throw ApiError.notFound("User not found");
+    user.status=!user.status;
+    await user.save();
+
+}
+
+const updateUserRole=async(userId,role)=>{
+    const user = await Auth.findById(userId);
+    if (!user) throw ApiError.notFound("User not found");
+    user.role=role;
+    await user.save();
+
+}
 module.exports={
     register,
     login,
@@ -154,5 +169,7 @@ module.exports={
     verifyEmail,
     forgotPassword,
     resetPassword,
-    getMe
+    getMe,
+    deleteUser,
+    updateUserRole,
 }

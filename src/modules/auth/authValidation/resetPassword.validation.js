@@ -12,13 +12,6 @@ const resetPasswordSchema=z.object({
   });
 
 
-const validateResetPassword=(data)=>{
-    const result=resetPasswordSchema.safeParse(data);
-    if(!result.success){
-        const errors=result.error.issues.map(issue=>`${issue.path[0]}: ${issue.message}`).join(", ");
-        throw new Error(errors);
-    }
-    return result.data;
-}
 
-module.exports={resetPasswordSchema, validateResetPassword}
+
+module.exports={resetPasswordSchema}
