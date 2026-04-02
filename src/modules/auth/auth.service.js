@@ -142,6 +142,7 @@ const resetPassword = async (token, newPassword) => {
 
 const getMe = async (userId) => {
   const user = await Auth.findById(userId);
+  console.log("GetMe User:", user);
   if (!user) throw ApiError.notFound("User not found");
   return user;
 };
